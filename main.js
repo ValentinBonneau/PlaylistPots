@@ -2,7 +2,15 @@ require('dotenv').config();
 const express = require('express')
 const {google} = require('googleapis')
 const app = express()
+const Routing = require('./route')
 
+let routing = new Routing(app);
+
+routing.routes.forEach( (e) =>{
+    app.get(e.uri, e.callback)
+})
+
+/*
 app.get('/', async (req, res) => {
     const playlistId = "PL3h2ZcDTBoxd6q9o2_ERGCrDKfawFokea"
     const youtubeToken = process.env.GOOGLE_TOKEN;
@@ -15,6 +23,8 @@ app.get('/', async (req, res) => {
     })).data
     res.send(playlist);
 })
+*/
+
 
 app.listen(process.env.PORT, () => {
     console.log(`app listening on port ${process.env.PORT}`)
