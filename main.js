@@ -7,6 +7,7 @@ const Routing = require('./route')
 let routing = new Routing(app);
 
 routing.routes.forEach( (e) =>{
+    switch (e.type)
     app.get(e.uri, e.callback)
 })
 
